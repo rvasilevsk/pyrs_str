@@ -1,5 +1,5 @@
 use regex::Regex;
-use std::borrow::Cow;
+use std::{borrow::Cow, sync::LazyLock};
 
 // impl str {
 //     pub fn simplify(&self) -> Cow<'_, str> {
@@ -8,9 +8,14 @@ use std::borrow::Cow;
 //     }
 // }
 
+// pub fn str_simplify(s: &str) -> Cow<'_, str> {
+//     let re_space = Regex::new(r"\s+").unwrap();
+//     re_space.replace_all(s.trim(), " ")
+// }
+
 pub fn str_simplify(s: &str) -> Cow<'_, str> {
-    let re_space = Regex::new(r"\s+").unwrap();
-    re_space.replace_all(s.trim(), " ")
+    static RE: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"\s+").unwrap());
+    RE.replace_all(s.trim(), " ")
 }
 
 #[cfg(test)]
