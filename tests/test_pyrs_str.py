@@ -3,12 +3,12 @@ from pyrs_str import *
 
 
 @pytest.mark.parametrize(
-    "l, r",
+    "left, right",
     [
         ("", ""),
         (" \r\n\t ", ""),
         ("  aaa   bbb  ", "aaa bbb"),
     ]
 )
-def test_str_simplify(l, r) -> None:
-    assert str_simplify(l) == r
+def test_str_simplify(left, right) -> None:
+    assert str_simplify(left) == right
